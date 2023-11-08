@@ -8,6 +8,8 @@ library.add(faEnvelope, faPen);
 
 // Component
 import Input from "./components/Input";
+import Button from "./components/Button";
+
 function App() {
   // Ces 3 states sont relié aux input correspondants
   const [email, setEmail] = useState("");
@@ -21,7 +23,7 @@ function App() {
   // Fonction qui est déclenchée lors de la soumission du formulaire
   const handleSubmit = (event) => {
     // Empêche le rafraichissement par défaut du navigateur lors de la soumission
-    console.log(event);
+    // console.log(event);
     event.preventDefault();
     // Vérifier que mon mot de passe fait plus de 8 caractères
     if (password.length >= 8) {
@@ -44,20 +46,16 @@ function App() {
           label="Name"
           type="text"
           placeholder="Fernand Naudin"
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-          // value={userName}
+          setState={setUsername}
+          value={userName}
         />
         <Input
           id="idEmail"
           label="Email"
           type="email"
           placeholder="distributeurdebourpifs@gmail.com"
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-          // value={email}
+          setState={setEmail}
+          value={email}
         />
         <Input
           id="idPassword"
@@ -65,31 +63,26 @@ function App() {
           helpMessage="(8 caractères nimimum)"
           type="password"
           placeholder="Jean Dupont"
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          errorMessage="Trop court !!!"
-          // value={password} Fout la merde !!!
+          setState={setPassword}
+          errorMessage="Votre mot de passe doit faire plus de 8 caractères."
+          value={password}
           state={showError}
-          setState={setShowError}
         />
         <Input
           id="idConfirmeEmail"
           label="Confirm your password"
           type="password"
           placeholder="Jean Dupont"
-          onChange={(event) => {
-            setconfirmPassword(event.target.value);
-          }}
-          errorMessage="c'est moche !!!"
-          // value={confirmPassword}
+          setState={setconfirmPassword}
+          errorMessage="Game Over !!!"
+          value={confirmPassword}
           state={showError}
-          setState={setShowError}
         />
-
-        <button className="button-primary" type="submit">
-          Créer mon compte
-        </button>
+        <Button
+          style="button-primary"
+          type="submit"
+          libelle="Créer mon compte"
+        ></Button>
       </form>
       <section className="section">
         <p>
@@ -99,12 +92,14 @@ function App() {
           Email : <strong>{email}</strong>
         </p>
         <p>
-          Password :<strong>{password}</strong>
+          Password : <strong>{password}</strong>
         </p>
-        <button className="button-primary" type="submit">
-          Modifier mes informations
-        </button>
       </section>
+      <Button
+        style="button-primary"
+        type="text"
+        libelle="Modifier mes informations"
+      ></Button>
       <footer>Footer</footer>
     </>
   );

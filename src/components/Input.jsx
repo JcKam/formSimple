@@ -3,19 +3,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Input = ({
   state,
   setState,
-  showError,
   label,
   type,
   id,
   name,
   errorMessage,
+  errorStatus,
   helpMessage,
   placeholder,
   value,
 }) => {
   return (
     <div className="input-group">
-      <label className="input-label" for={id}>
+      <label className="input-label" htmlFor={id}>
         {label}&nbsp;
         <small>{helpMessage}</small>
       </label>
@@ -24,13 +24,16 @@ const Input = ({
         id={id}
         type={type}
         name={name}
+        onChange={(event) => {
+          setState(event.target.value);
+        }}
         placeholder={placeholder}
         value={value}
       ></input>
 
       {state === true && (
         <p className="input-help" aria-labelledby={id}>
-          Votre mot de passe doit faire plus de 8 caractères.{errorMessage}
+          {errorMessage}
         </p>
       )}
       {/* <FontAwesomeIcon icon="envelope" className="envelope" /> */}
